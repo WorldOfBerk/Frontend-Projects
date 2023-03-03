@@ -7,3 +7,23 @@ body.cbody{
     margin: auto;
     display: block;
 }
+
+#tr-content{
+    border: solid rgb(150, 45, 45);
+    width: 500px;
+}
+
+#en-content{
+    border: solid rgb(68, 140, 223);
+    width: 500px;
+}
+
+#de-content{
+    border: solid rgb(201, 184, 32);
+    width: 500px;
+}
+
+#fr-content{
+    border: solid white;
+    width: 650px;
+}
