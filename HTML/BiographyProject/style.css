@@ -1,3 +1,9 @@
 body.cbody{
     background-color: rgb(187, 158, 214);
 }
+
+#profilepp{
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+}
