@@ -60,7 +60,7 @@ form button:hover {
     list-style: none;
 }
 
-todo {
+.todo {
     margin: 0.5rem;
     padding-left: 0.5rem;
     background: white;
