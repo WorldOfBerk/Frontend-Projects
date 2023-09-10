@@ -48,6 +48,10 @@ function deleteCheck(e){
     if(item.classList[0] === "done-button"){
         const todo = item.parentElement;
         todo.classList.toggle("done");
+
+        const todos = todoList.childNodes;
+        const todoIndex = Array.from(todos).indexOf(todo);
+        updateLocalTodos(todoIndex, todo.classList.contains("done"));
     }
 }
 
@@ -76,6 +80,19 @@ function filterTodo(e){
     });
 }
 
+function updateLocalTodos(index, done) {
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    } else{
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    todos[index].done = done;
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 function saveLocalTodos(todo){
     let todos;
     if(localStorage.getItem("todos") === null){
@@ -83,7 +100,9 @@ function saveLocalTodos(todo){
     } else{
         todos = JSON.parse(localStorage.getItem("todos"));
     }
-    todos.push(todo);
+    
+    todos.push({ text: todo, done: false });
+
     localStorage.setItem("todos", JSON.stringify(todos));
 }
 
@@ -97,8 +116,13 @@ function getLocalTodos(){
     todos.forEach(function(todo){
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("todo");
+
+        if (todo.done) {
+            todoDiv.classList.add("done");
+        }
+
         const newTodo = document.createElement("li");
-        newTodo.innerText = todo;
+        newTodo.innerText = todo.text;
         newTodo.classList.add("todo-item");
         todoDiv.appendChild(newTodo);
 
@@ -125,6 +149,6 @@ function removeLocalTodos(todo){
     }
 
     const todoIndex = todo.children[0].innerText;
-    todos.splice(todos.indexof(todoIndex), 1);
+    todos = todos.filter(item => item.text !== todoIndex);
     localStorage.setItem("todos", JSON.stringify(todos));
 }
